@@ -1,0 +1,366 @@
+
+{% load static %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>X-Eats</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+    <link rel="stylesheet" href="{%static 'shop/newversion/fonts/icomoon/style.css'%}">
+
+    <link rel="stylesheet" href="{%static 'shop/newversion/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{%static 'shop/newversion/css/magnific-popup.css'%}">
+    <link rel="stylesheet" href="{%static 'shop/newversion/css/jquery-ui.css'%}">
+    <link rel="stylesheet" href="{%static 'shop/newversion/css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{%static 'shop/newversion/css/owl.theme.default.min.css'%}">
+
+
+    <link rel="stylesheet" href="{%static 'shop/newversion/css/aos.css'%}">
+
+    <link rel="stylesheet" href="{%static 'shop/newversion/css/style.css'%}">
+
+
+  </head>
+  <body>
+
+  <div class="site-wrap">
+
+
+    <div class="site-navbar bg-white py-2">
+
+      <div class="search-wrap">
+        <div class="container">
+          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+          
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="logo">
+            <div class="site-logo">
+              <a href="{% url 'shop:home' %}" class="js-logo-clone">X-Eats</a>
+            </div>
+          </div>
+          <div class="main-nav d-none d-lg-block">
+            <nav class="site-navigation text-right text-md-center" role="navigation">
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+                <li>
+                  <a href="{% url 'shop:home' %}">Home</a>
+                </li>
+
+                <li><a href="{% url 'shop:market' %}">Restaurants</a></li>
+                <li class="has-children active">
+                  <a href="{% url 'shop:client' %}">User</a>
+                  <ul class="dropdown">
+                      <li><a href="{% url 'shop:clientdata'%}">{{c.user}}</a></li>
+                      <li><a href="{% url 'shop:mycoins'%}">My Coins</a></li>
+                      {% if user.is_authenticated %}
+                      <li><a class="dropdown-item" href="{% url "shop:signout" %}">Sign Out</a></li>
+                        {% else %}
+                           <li>  <a class="dropdown-item" href="{% url "shop:signin" %}">Sign In</a></li>
+                            <li> <a class="dropdown-item" href="{% url "shop:signup" %}">Signup</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+               <!-- <li><a href="">New Arrivals</a></li> -->
+
+              </ul>
+            </nav>
+          </div>
+          <div class="icons">
+            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+            <a href="{% url 'shop:mycart'%}" class="icons-btn d-inline-block bag">
+              <span class="icon-shopping-bag"></span>
+            </a>
+            <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span class="icon-menu"></span></a>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+    {% block bill %}
+    {% block base %}  {% endblock  %}
+    {% block content %}
+    {% block coins-me %}
+
+    <div class="site-blocks-cover" data-aos="fade">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 ml-auto order-md-2 align-self-start">
+              <div class="site-block-cover-content">
+              <h2 class="sub-title"  >#New  Events   -December-</h2>
+             <h1 > Coins For TA   </h1>
+              <a class="btn btn-black rounded-0" href="{% url 'shop:market' %}">Shop Now</a>
+              </div>
+            </div>
+            <div class="col-md-6 order-1 align-self-end">
+              <img src="{%static 'shop/newversion/images/X-Eats-png.png'%}" alt="Image" class="img-fluid">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-section site-section-sm site-blocks-1 border-0" data-aos="fade">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="">
+              <div class="icon mr-4 align-self-start">
+                <span class="icon-truck"></span>
+              </div>
+              <div class="text">
+                <h2 class="text-uppercase">Free Shipping</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon mr-4 align-self-start">
+                <span class="icon-refresh2"></span>
+              </div>
+              <div class="text">
+                <h2 class="text-uppercase">Free Returns</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon mr-4 align-self-start">
+                <span class="icon-help"></span>
+              </div>
+              <div class="text">
+                <h2 class="text-uppercase">Customer Support</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="site-section custom-border-bottom" data-aos="fade">
+        <div class="container">
+          <div class="row mb-5">
+            <div class="col-md-6">
+              <div class="block-16">
+                <figure>
+                  <img src="{% static 'shop/Capturess.png'%}" alt="Image placeholder" class="img-fluid rounded">
+                  <a href="{%static 'shop/video-pre.MP4'%}" class="play-button popup-vimeo"><span class="icon-play"></span></a>
+
+                </figure>
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+
+
+              <div class="site-section-heading pt-3 mb-4">
+                <h2 class="text-black">How We Started</h2>
+              </div>
+              <p>Bsmallah el ra7man el ra7em , el nahrda ya gd3an hn2olkom 3la 7aga f4e5a ele hya ana zat nafsy mosh 3arfha xD </p>
+              <p>Accusantium dolor ratione maiores est deleniti nihil? Dignissimos est, sunt nulla illum autem in, quibusdam cumque recusandae, laudantium minima repellendus.</p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-section custom-border-bottom" data-aos="fade">
+        <div class="container">
+          <div class="row justify-content-center mb-5">
+            <div class="col-md-7 site-section-heading text-center pt-4">
+              <h2>The Team</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-lg-3">
+
+              <div class="block-38 text-center">
+                <div class="block-38-img">
+                  <div class="block-38-header">
+                    <img src="{% static 'shop/mangers/Hassan Elshalzy.png'%}" alt="Image placeholder" class="mb-4">
+                    <h3 class="block-38-heading h4">Elizabeth Graham</h3>
+                    <p class="block-38-subheading">CEO/Co-Founder</p>
+                  </div>
+                  <div class="block-38-body">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae aut minima nihil sit distinctio recusandae doloribus ut fugit officia voluptate soluta. </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="block-38 text-center">
+                <div class="block-38-img">
+                  <div class="block-38-header">
+                    <img src="{% static 'shop/mangers/Hassan Elshalzy.png'%}" alt="Image placeholder" class="mb-4">
+                    <h3 class="block-38-heading h4">Jennifer Greive</h3>
+                    <p class="block-38-subheading">Co-Founder</p>
+                  </div>
+                  <div class="block-38-body">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae aut minima nihil sit distinctio recusandae doloribus ut fugit officia voluptate soluta. </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="block-38 text-center">
+                <div class="block-38-img">
+                  <div class="block-38-header">
+                    <img src="{% static 'shop/mangers/Hassan Elshalzy.png'%}" alt="Image placeholder" class="mb-4">
+                    <h3 class="block-38-heading h4">Patrick Marx</h3>
+                    <p class="block-38-subheading">Marketing</p>
+                  </div>
+                  <div class="block-38-body">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae aut minima nihil sit distinctio recusandae doloribus ut fugit officia voluptate soluta. </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="block-38 text-center">
+                <div class="block-38-img">
+                  <div class="block-38-header">
+                    <img src="{% static 'shop/mangers/Hassan Elshalzy.png'%}" alt="Image placeholder" class="mb-4">
+                    <h3 class="block-38-heading h4">Mike Coolbert</h3>
+                    <p class="block-38-subheading">Sales Manager</p>
+                  </div>
+                  <div class="block-38-body">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae aut minima nihil sit distinctio recusandae doloribus ut fugit officia voluptate soluta. </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    <div class="site-blocks-cover inner-page py-5" data-aos="fade">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 ml-auto order-md-2 align-self-start">
+            <div class="site-block-cover-content">
+            <h2 class="sub-title">#Up Comming Event</h2>
+            <h1>Book Coins Now !</h1>
+
+            </div>
+          </div>
+          <div class="col-md-6 order-1 align-self-end">
+            <img src="{%static 'shop/newversion/images/coins.png'%}" alt="Image" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+    {% endblock %}
+    {%endblock%}
+    <footer class="site-footer custom-border-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+            <h3 class="footer-heading mb-4">Promo</h3>
+            <a href="#" class="block-6">
+              <img src="{%static 'shop/newversion/images/coins.png'%}"  alt="Image placeholder" class="img-fluid rounded mb-4">
+              <h3 class="font-weight-light  mb-0">Promo Code for New Coins !!</h3>
+              <p>Promo finish at  15 &mdash; 11, 2019</p>
+            </a>
+          </div>
+          <div class="col-lg-5 ml-auto mb-5 mb-lg-0">
+            <div class="row">
+              <div class="col-md-12">
+                <h3 class="footer-heading mb-4">Quick Links</h3>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <ul class="list-unstyled">
+                  <li><a href="#">Sell online</a></li>
+                  <li><a href="#">Features</a></li>
+                  <li><a href="#">Shopping cart</a></li>
+                  <li><a href="#">Store builder</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <ul class="list-unstyled">
+                  <li><a href="#">Mobile commerce</a></li>
+                  <li><a href="#">Dropshipping</a></li>
+                  <li><a href="#">Website development</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <ul class="list-unstyled">
+                  <li><a href="#">Point of sale</a></li>
+                  <li><a href="#">Hardware</a></li>
+                  <li><a href="#">Software</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="block-5 mb-5">
+              <h3 class="footer-heading mb-4">Contact Info</h3>
+              <ul class="list-unstyled">
+                <li class="address">Octobor- 3th disrct </li>
+                <li class="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
+                <li class="email">h.elshazly@nu.edu.eg</li>
+              </ul>
+            </div>
+
+            <div class="block-7">
+              <form action="{% url 'shop:message'%}" method="post">
+              {%csrf_token%}
+                <label for="email_subscribe" class="footer-heading">Subscribe</label>
+                <div class="form-group">
+                  <input type="text" class="form-control py-4" id="email_subscribe" placeholder="Message" name="message">
+                  <input type="submit" class="btn btn-sm btn-primary" value="Send">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+  </div>
+
+  <script src="{%static 'shop/newversion/js/jquery-3.3.1.min.js'%}"></script>
+  <script src="{%static 'shop/newversion/js/jquery-ui.js'%}"></script>
+  <script src="{%static 'shop/newversion/js/popper.min.js'%}"></script>
+  <script src="{%static 'shop/newversion/js/bootstrap.min.js'%}"></script>
+  <script src="{%static 'shop/newversion/js/owl.carousel.min.js'%}"></script>
+  <script src="{%static 'shop/newversion/js/jquery.magnific-popup.min.js'%}"></script>
+  <script src="{%static 'shop/newversion/js/aos.js'%}"></script>
+
+  <script src="{%static 'shop/newversion/js/main.js'%}"></script>
+
+
+
+  <!-- market -->
+<script src="{% static 'shop/newversion/js/jquery-3.2.1.min.js'%}"></script>
+<script src="{% static 'shop/newversion/cs/bootstrap-4.1.2/popper.js'%}"></script>
+<script src="{% static 'shop/newversion/cs/bootstrap-4.1.2/bootstrap.min.js'%}"></script>
+<script src="{% static 'shop/newversion/plugins/greensock/TweenMax.min.js'%}"></script>
+<script src="{% static 'shop/newversion/plugins/greensock/TimelineMax.min.js'%}"></script>
+<script src="{% static 'shop/newversion/plugins/scrollmagic/ScrollMagic.min.js'%}"></script>
+<script src="{% static 'shop/newversion/plugins/greensock/animation.gsap.min.js'%}"></script>
+<script src="{% static 'shop/newversion/plugins/greensock/ScrollToPlugin.min.js'%}"></script>
+<script src="{% static 'shop/newversion/plugins/OwlCarousel2-2.2.1/owl.carousel.js'%}"></script>
+<script src="{% static 'shop/newversion/plugins/easing/easing.js'%}"></script>
+<script src="{% static 'shop/newversion/plugins/progressbar/progressbar.min.js'%}"></script>
+<script src="{% static 'shop/newversion/plugins/parallax-js-master/parallax.min.js'%}"></script>
+<script src="{% static 'shop/newversion/plugins/Isotope/isotope.pkgd.min.js'%}"></script>
+<script src="{% static 'shop/newversion/plugins/Isotope/fitcolumns.js'%}"></script>
+<script src="{% static 'shop/newversion/js/category.js'%}"></script>
+<script>
+    //$("html,body").animate({"scrollTop": $(".red").offset().top},1000);
+    $(".down-filter").on("click",function(){
+
+      $("html,body").animate({"scrollTop": 1100},1000);
+
+    });
+      </script>
+
+  </body>
+</html>
