@@ -21,4 +21,4 @@ class CartAdd(forms.Form):
 class OrderCreateForm(forms.ModelForm):
     class Meta:
         model = models.Order
-        fields = ('comment', 'total_price',)
+        fields = '__all__'

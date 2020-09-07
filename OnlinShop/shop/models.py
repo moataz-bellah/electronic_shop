@@ -59,9 +59,6 @@ class Order(models.Model):
     date         = models.DateTimeField(auto_now_add = True)
     total_price  = models.PositiveIntegerField(default = 0)
     paid         = models.BooleanField(default = False)
-    product_name = models.TextField(blank = True)
-    comment      = models.TextField(blank = True)
-    username2    = models.TextField(blank = True)
     ordered      = models.BooleanField(default = False)
     def __str__(self):
         return f"{self.user} "
