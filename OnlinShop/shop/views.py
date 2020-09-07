@@ -66,7 +66,7 @@ def client_data(request):
     #else:
     #    form=Client_Form()
     #context={'form':form}
-    return render(request,'shop/client.html',{})
+    return render(request,'client.html',{})
 @login_required
 def data_client(request):
     c=models.Client.objects.filter(user=request.user).first()
