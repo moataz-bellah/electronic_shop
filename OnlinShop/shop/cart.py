@@ -51,8 +51,8 @@ class Cart(object):
             self.save()
     def update(self,product):
         product_id = str(product.id)
-        
-            
+
+
     def __iter__(self):
         """
         Iterate over the items in the cart and get the products from the database.
@@ -67,6 +67,15 @@ class Cart(object):
             item['price'] = item['price']
             item['total_price'] = item['price'] * item['quantity']
             yield item
+    def getQuantity(self,product_id):
+        product_ids = self.cart.keys()
+        print(product_ids)
+        for x in self.cart:
+            if str(x) == str(product_id):
+                print(x)
+                quan = self.cart[str(x)]['quantity']
+                return quan
+        return 0
 
     def __len__(self):
         """

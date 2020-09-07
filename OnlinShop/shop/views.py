@@ -57,7 +57,7 @@ def signup(request):
     else:
         form = SignupForm()
     context = {"form": form}
-    return render(request, "shop/signup.html", context)
+    return render(request, "account/signup.html", context)
 @login_required
 def client_data(request):
     #if request.method=="POST":
@@ -91,7 +91,7 @@ def signin(request):
     else:
         form = SigninForm()
     context = {"form": form}
-    return render(request, "shop/signin.html", context)
+    return render(request, "account/login.html", context)
 @login_required()
 def signout(request):
     logout(request)
@@ -105,8 +105,12 @@ def home(request):
     # Filters
     productFilter =  filters.ProductFilter(request.GET,queryset = products) # filter products
     products = productFilter.qs # list all data filters
-    context = {"products": products, "categories": categories,'c':c,'productFilter':productFilter}
-    return render(request, "shop/home.html", context)
+    #pagination
+    paginator = Paginator(products,10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {"products": products, "categories": categories,'c':c,'productFilter':productFilter,'page_obj':page_obj}
+    return render(request, "home.html", context)
 def testFilter(request):
     products = Product.objects.filter(active=True)
     categories = Category.objects.filter(active=True)
@@ -118,6 +122,14 @@ def testFilter(request):
     productFilter =  filters.ProductFilter(request.GET,queryset = products) # filter products
     products = productFilter.qs # list all data filters
     return render(request,'test.html',{'productFilter':productFilter,'products':products})
+def categoryProducts(request,name):
+    category = models.Category.objects.get(name = name)
+    products = models.Product.objects.filter(category = category)
+    allCategories = models.Category.objects.all()
+    paginator = Paginator(products,10)
+    page_number = request.GET.get('get')
+    page_obj = paginator.get_page(page_number)
+    return render(request,'home.html',{'page_obj':page_obj,'categories':allCategories})
 @login_required
 def market(request):
     products = Product.objects.filter(active=True)
@@ -131,10 +143,13 @@ def search(request):
     q = request.GET["q"]
     products = Product.objects.filter(active=True, name__icontains=q)
     categories = Category.objects.filter(active=True)
+    paginator = Paginator(products,10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {"products": products,
                "categories": categories,
-               "title": q + " - search"}
-    return render(request, "shop/list.html", context)
+               "title": q + " - search",'page_obj':page_obj}
+    return render(request, "home.html", context)
 
 @login_required()
 def categories(request, slug):
@@ -156,7 +171,7 @@ def detail(request, product_id):
                'c':c,
                'date':date
                }
-    return render(request, "shop/detail.html", context)
+    return render(request, "product.html", context)
 @login_required
 def mycart(request):
     c = models.Client.objects.filter(user=request.user)[0]
@@ -175,7 +190,7 @@ def mycart(request):
                "categories": categories,
                "cart":cart,
                "title": "My Cart"}
-    return render(request, "shop/list.html", context)
+    return render(request, "order_summary.html", context)
 @login_required
 def coins_form(request):
     c=models.Client.objects.filter(user=request.user).first()
@@ -208,7 +223,7 @@ def bill_page(request):
     dt = datetime.datetime.today()
     order_item=models.OrderItem.objects.filter(user=request.user)
     c=models.Client.objects.filter(user=request.user)
-    return render(request,'shop/bill.html',{'data2':order_item,'c':c})
+    return render(request,'checkout.html',{'data2':order_item,'c':c})
 @login_required()
 def checkout(request):
     request.session.pop('data', None)
@@ -241,10 +256,10 @@ def update_page(request,id):
     cart=Cart(request)
     order_item=models.OrderItem.objects.filter(product=id).first()
     product=models.Product.objects.filter(id=id).first()
-    return render(request,'shop/update.html',{'data':product,'cart':cart,'order_item':order_item})
+    data = cart.getQuantity(id)
+    return render(request,'product_update.html',{'data':product,'cart':data,'order_item':order_item})
 @login_required()
 def update(request,id):
-
     cart=Cart(request)
     order=models.OrderItem.objects.filter(user=request.user,product=id).first()
     product=models.Product.objects.filter(id=id).first()
@@ -256,7 +271,35 @@ def update(request,id):
     #order.quantity=int(request.POST['quantity'])
     #order.save()
     return redirect("shop:mycart")
+def updateQuantityPlus(request,product_id):
+    cart=Cart(request)
+    data = cart.getQuantity(product_id)
+    data+=1
+    print('dataaaaaaaaaa',data)
+    product=models.Product.objects.filter(id=product_id).first()
+    order=models.OrderItem.objects.filter(user=request.user,product = product).first()
+    #order2 = get_object_or_404(models.OrderItem,user = request.user,product=product)
 
+    newQuantity = 1
+    cart.add(
+			product=product,
+			quantity = data,update_quantity=True)
+    return redirect("shop:mycart")
+def updateQuantityMinus(request,product_id):
+    cart=Cart(request)
+    data = cart.getQuantity(product_id)
+    if data >=1:
+        data-=1
+    print('dataaaaaaaaaa',data)
+    product=models.Product.objects.filter(id=product_id).first()
+    order=models.OrderItem.objects.filter(user=request.user,product = product).first()
+    #order2 = get_object_or_404(models.OrderItem,user = request.user,product=product)
+
+    newQuantity = 1
+    cart.add(
+			product=product,
+			quantity = data,update_quantity=True)
+    return redirect("shop:mycart")
 def cart_remove(request,product_id):
     cart=Cart(request)
     product=get_object_or_404(models.Product,id=product_id)

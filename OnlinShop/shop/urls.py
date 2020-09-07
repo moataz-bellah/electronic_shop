@@ -40,6 +40,9 @@ urlpatterns = [
     path('updateclient/',views.update_client,name='updateclient'),
     path('data/',views.data_client,name='data'),
     path('test_filter/',views.testFilter,name = 'test_filter'),
+    path('category_products/<str:name>/',views.categoryProducts,name = 'category_products'),
+    path('update_quantity_plus/<int:product_id>/',views.updateQuantityPlus,name='update_quantity_plus'),
+    path('update_quantity_minus/<int:product_id>/',views.updateQuantityMinus,name='update_quantity_minus'),
     ##################### API URLS ####################################
     path('api/login', CustomObtainAuthToken.as_view()),
     path('api/products/', views.api_products, name="api_products"),

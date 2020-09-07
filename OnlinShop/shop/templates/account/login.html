@@ -1,0 +1,36 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+  <main>
+    <div class="container">
+      <section class="mb-4">
+        <div class="row wow fadeIn">
+          <div class='col-6 offset-3'>
+          <h1>{% trans "Sign In" %}</h1>
+
+<a href="{% url 'shop:signup' %}">sign up</a>
+
+          <div class="socialaccount_ballot">
+
+          </div>
+
+
+          <form class="login" method="POST" action="{% url 'shop:signin' %}">
+            {% csrf_token %}
+            {{ form|crispy }}
+
+            <a class="btn btn-default" href="{% url 'password_reset' %}">{% trans "Forgot Password?" %}</a>
+            <button class="btn btn-primary" type="submit">{% trans "Sign In" %}</button>
+          </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+{% endblock %}
